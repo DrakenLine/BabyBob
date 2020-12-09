@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:baby_bob/interface.dart';
+import 'package:flutter/services.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -9,6 +11,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([ DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
     return MaterialApp(
       title: 'Baby Bob',
       theme: ThemeData(
