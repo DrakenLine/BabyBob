@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:baby_bob/interface.dart';
 import 'package:flutter/services.dart';
 
+=======
+import 'package:baby_bob/screen.dart';
+>>>>>>> 06beaf21bf808f3fc72cc83adfc0eea69fc7332a
 
 void main() {
   runApp(MyApp());
 }
 
+<<<<<<< HEAD
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -52,6 +57,21 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+=======
+class MyApp extends StatelessWidget with PortraitModeMixin {
+  const MyApp();
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return MaterialApp(
+        home: Scaffold(
+            body: Container(
+                child: Center(
+                    child: Text(
+      'Bienvenue sur Baby Bob !'.toUpperCase(),
+    )))));
+>>>>>>> 06beaf21bf808f3fc72cc83adfc0eea69fc7332a
   }
 
   void PathInterface(){
