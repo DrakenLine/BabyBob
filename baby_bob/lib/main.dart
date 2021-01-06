@@ -13,7 +13,13 @@ class MyApp extends StatelessWidget with PortraitModeMixin {
   Widget build(BuildContext context) {
     super.build(context);
     return MaterialApp(
-      home: Scaffold(body: MyHomePage(title: 'Flutter Demo Home Page')),
+      initialRoute: '/',
+      routes: {
+        // When navigating to the "/" route, build the FirstScreen widget.
+        '/': (context) => MyHomePage(),
+        // When navigating to the "/second" route, build the SecondScreen widget.
+        '/interface': (context) => Interface(),
+      },
     );
   }
 }
@@ -36,18 +42,14 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'Bienvenue sur Baby Bob !'.toUpperCase(),
+              style: TextStyle(fontFamily: 'Conthrax')
             ),
-            ElevatedButton(onPressed: pathInterface, child: Text('GO')),
+            ElevatedButton(
+                onPressed: () => Navigator.pushNamed(context, '/interface'),
+                child: Text('GO')),
           ],
         ),
       ),
     );
-  }
-
-  void pathInterface() {
-    Navigator.push(context,
-        new MaterialPageRoute(builder: (BuildContext context) {
-      return new Interface();
-    }));
   }
 }
