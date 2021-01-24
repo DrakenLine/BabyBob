@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:control_pad/control_pad.dart';
+import 'package:control_pad/models/gestures.dart';
 
 
 class Interface extends StatefulWidget {
@@ -19,16 +21,26 @@ class _InterfaceState extends State<Interface> {
 
   bool isSwitched = false;
 
+  JoystickDirectionCallback onDirectionChange(double degrees, double distance){
+    print("Degrees: ${degrees.toStringAsFixed(2)}, distance: ${distance.toStringAsFixed(2)}");
+  }
+
+  PadButtonPressedCallback padButtonPressedCallback (int buttonIndex, Gestures gesture ){
+    print("button index: $buttonIndex");
+  }
+
 
   @override
   Widget build(BuildContext context) {
     double sizeDrawer = MediaQuery.of(context).size.width / 1.75;
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: _scaffoldKey,
       body: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 30.0, left: 20.0),
+              margin: EdgeInsets.only(top: height /10, right:width /1.15),
               child: Ink(
                   decoration: const ShapeDecoration(
                     color: Colors.white70,
@@ -40,7 +52,26 @@ class _InterfaceState extends State<Interface> {
                     icon: Icon(Icons.settings, color: Colors.black54, size: 40.0,)
                 )
               )
-            )
+            ),
+            Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: height /2.5, left: width /30),
+                    alignment: Alignment.bottomLeft,
+                    child: JoystickView(
+                      size: width /5,
+                      onDirectionChanged: onDirectionChange,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: height /2.5, left: width /2),
+                    child: PadButtonsView(
+                      size: width /5,
+                      padButtonPressedCallback: padButtonPressedCallback,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       drawer: Theme(
