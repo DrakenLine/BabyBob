@@ -1,3 +1,4 @@
+import 'package:control_pad/models/pad_button_item.dart';
 import 'package:flutter/material.dart';
 import 'package:control_pad/control_pad.dart';
 import 'package:control_pad/models/gestures.dart';
@@ -25,9 +26,6 @@ class _InterfaceState extends State<Interface> {
     print("Degrees: ${degrees.toStringAsFixed(2)}, distance: ${distance.toStringAsFixed(2)}");
   }
 
-  PadButtonPressedCallback padButtonPressedCallback (int buttonIndex, Gestures gesture ){
-    print("button index: $buttonIndex");
-  }
 
 
   @override
@@ -37,10 +35,11 @@ class _InterfaceState extends State<Interface> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       key: _scaffoldKey,
+      backgroundColor: Colors.greenAccent,
       body: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: height /10, right:width /1.15),
+              margin: EdgeInsets.only(top: height /15, right:width /1.15),
               child: Ink(
                   decoration: const ShapeDecoration(
                     color: Colors.white70,
@@ -53,25 +52,65 @@ class _InterfaceState extends State<Interface> {
                 )
               )
             ),
-            Row(
+            Flex(
+              direction: Axis.horizontal,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: height /2.5, left: width /30),
-                    alignment: Alignment.bottomLeft,
-                    child: JoystickView(
-                      size: width /5,
-                      onDirectionChanged: onDirectionChange,
-                  ),
+                  margin: EdgeInsets.only(top: height/2.20, left: width/30),
+                    child: Row(
+                      children: [
+                        Ink(
+                          decoration: const ShapeDecoration(
+                            color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
+                            shape: CircleBorder(),
+                          ),
+                          child: IconButton(
+                            icon: Icon(Icons.keyboard_arrow_up),
+                            color: Colors.black,
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    )
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: height /2.5, left: width /2),
-                    child: PadButtonsView(
-                      size: width /5,
-                      padButtonPressedCallback: padButtonPressedCallback,
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.4),
+                        blurRadius: 50.0, // soften the shadow
+                        spreadRadius: 30.0, //extend the shadow
+                      )
+                    ],
+                  ),
+                  margin: EdgeInsets.only(top: height/2.10, right: width/20),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        shape: CircleBorder(),
+                        side: BorderSide(color: Colors.black.withOpacity(0.5), width: 3),
+                        primary: Colors.black,
+                        backgroundColor: Colors.grey.withOpacity(0.2),
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                        minimumSize: Size(width /8, width /8),
+                      ),
+                    child: Text(
+                      "HOLD",
+                      style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Conthrax',
+                      color: Colors.black.withOpacity(0.5)
+                    ),
                   ),
                 ),
+                ),
               ],
-            ),
+            )
+            
           ],
         ),
       drawer: Theme(
