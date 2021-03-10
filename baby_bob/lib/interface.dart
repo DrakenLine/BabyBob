@@ -34,139 +34,254 @@ class _InterfaceState extends State<Interface> {
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: Colors.greenAccent,
-      body: Column(
-        children: <Widget>[
-          Container(
-              margin: EdgeInsets.only(top: height / 15, right: width / 1.15),
-              child: Ink(
-                  decoration: const ShapeDecoration(
-                    color: Colors.white70,
-                    shape: CircleBorder(),
-                  ),
-                  child: IconButton(
-                      padding: EdgeInsets.all(0.0),
-                      onPressed: _openDrawer,
-                      icon: Icon(
-                        Icons.settings,
-                        color: Colors.black54,
-                        size: 40.0,
-                      )))),
-          Flex(
-            direction: Axis.horizontal,
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                  margin: EdgeInsets.only(top: height / 2.20, left: width / 35),
-                  child: Column(
-                    children: [
-                      Ink(
-                        decoration: const ShapeDecoration(
-                          color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
-                          shape: CircleBorder(),
-                        ),
-                        child: IconButton(
-                          icon: Icon(Icons.keyboard_arrow_up),
-                          color: Colors.black,
-                          onPressed: () {},
-                        ),
-                      ),
-                      SizedBox(
-                        width: width / 100,
-                        height: height / 20,
-                      ),
-                      Ink(
-                        decoration: const ShapeDecoration(
-                          color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
-                          shape: CircleBorder(),
-                        ),
-                        child: IconButton(
-                          icon: Icon(Icons.keyboard_arrow_down),
-                          color: Colors.black,
-                          onPressed: () {},
-                        ),
-                      ),
-                    ],
-                  )),
-              Container(
-                  margin:
-                      EdgeInsets.only(top: height / 2.20, left: width / 100),
-                  child: Column(
-                    children: [
-                      Ink(
-                        decoration: const ShapeDecoration(
-                          color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                        ),
-                        child: IconButton(
-                          iconSize: 30,
-                          icon: Icon(Icons.arrow_upward),
-                          color: Colors.black,
-                          onPressed: () {},
-                        ),
-                      ),
-                      SizedBox(
-                        width: width / 100,
-                        height: height / 20,
-                      ),
-                      Ink(
-                        decoration: const ShapeDecoration(
-                          color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
-                          shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                        ),
-                        child: IconButton(
-                          icon: Icon(Icons.arrow_downward),
-                          color: Colors.black,
-                          onPressed: () {},
-                        ),
-                      ),
-                    ],
-                  )),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: height / 5,
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        blurRadius: 50.0, // soften the shadow
-                        spreadRadius: 30.0, //extend the shadow
-                      )
-                    ],
-                  ),
-                  margin:
-                      EdgeInsets.only(top: height / 2.10, right: width / 20),
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      shape: CircleBorder(),
-                      side: BorderSide(
-                          color: Colors.black.withOpacity(0.5), width: 3),
-                      primary: Colors.black,
-                      backgroundColor: Colors.grey.withOpacity(0.2),
-                      textStyle: TextStyle(
-                        color: Colors.black,
-                      ),
-                      minimumSize: Size(width / 8, width / 8),
+      body: Container(
+        width: width,
+        // decoration: BoxDecoration(
+        // image: DecorationImage(
+        // image: AssetImage("IMG_2240.jpeg"), fit: BoxFit.fill)),
+        child: Column(
+          children: <Widget>[
+            Container(
+                margin: EdgeInsets.only(top: height / 15, right: width / 1.15),
+                child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: Colors.white70,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),
-                    child: Text(
-                      "HOLD",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Conthrax',
-                          color: Colors.black.withOpacity(0.5)),
+                    child: IconButton(
+                        padding: EdgeInsets.all(0.0),
+                        onPressed: _openDrawer,
+                        icon: Icon(
+                          Icons.settings,
+                          color: Colors.black54,
+                          size: 40.0,
+                        )))),
+            Flex(
+              direction: Axis.horizontal,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ///////////////////////// Coté gauche ///////////////////////////////////////////
+                Container(
+                    margin:
+                        EdgeInsets.only(top: height / 2.20, left: width / 35),
+                    child: Column(
+                      children: [
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                          ),
+                          child: IconButton(
+                            icon: Icon(Icons.keyboard_arrow_up),
+                            color: Colors.black,
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          width: width / 100,
+                          height: height / 20,
+                        ),
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                          ),
+                          child: IconButton(
+                            icon: Icon(Icons.keyboard_arrow_down),
+                            color: Colors.black,
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    )),
+                Container(
+                    margin:
+                        EdgeInsets.only(top: height / 2.20, left: width / 100),
+                    child: Column(
+                      children: [
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: IconButton(
+                            iconSize: 30,
+                            icon: Icon(Icons.arrow_upward),
+                            color: Colors.black,
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          width: width / 100,
+                          height: height / 20,
+                        ),
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: IconButton(
+                            iconSize: 30,
+                            icon: Icon(Icons.arrow_downward),
+                            color: Colors.black,
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    )),
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    height: height / 5,
+                    decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(0.5),
+                          blurRadius: 25.0, // soften the shadow
+                          spreadRadius: 15.0, //extend the shadow
+                        )
+                      ],
+                    ),
+                    margin:
+                        EdgeInsets.only(top: height / 2.10, right: width / 20),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        shape: CircleBorder(),
+                        side: BorderSide(
+                            color: Colors.black, width: 3),
+                        primary: Colors.black,
+                        backgroundColor: Colors.grey.withOpacity(0.2),
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                        minimumSize: Size(width / 8, width / 8),
+                      ),
+                      child: Text(
+                        "TENIR",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Conthrax',
+                            color: Colors.black),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          )
-        ],
+                //////////////////////////////////////// Coté droit ////////////////////////////////////////////
+                // Bouton Hold //
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    height: height / 5,
+                    decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.white.withOpacity(0.5),
+                          blurRadius: 25.0, // soften the shadow
+                          spreadRadius: 15.0, //extend the shadow
+                        )
+                      ],
+                    ),
+                    margin:
+                        EdgeInsets.only(top: height / 2.10, left: width / 3.03),
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        shape: CircleBorder(),
+                        side: BorderSide(
+                            color: Colors.black, width: 3),
+                        primary: Colors.black,
+                        backgroundColor: Colors.grey.withOpacity(0.2),
+                        textStyle: TextStyle(
+                          color: Colors.black,
+                        ),
+                        minimumSize: Size(width / 8, width / 8),
+                      ),
+                      child: Text(
+                        "TENIR",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Conthrax',
+                            color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
+                // Fleche bras //
+                Container(
+                    margin: EdgeInsets.only(top: height / 2.20),
+                    child: Column(
+                      children: [
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: IconButton(
+                            iconSize: 30,
+                            icon: Icon(Icons.arrow_upward),
+                            color: Colors.black,
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          width: width / 100,
+                          height: height / 20,
+                        ),
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: IconButton(
+                            iconSize: 30,
+                            icon: Icon(Icons.arrow_downward),
+                            color: Colors.black,
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    )),
+                // Fleche moteur //
+                Container(
+                    margin:
+                        EdgeInsets.only(top: height / 2.20, left: width / 100),
+                    child: Row(
+                      children: [
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                          ),
+                          child: IconButton(
+                            icon: Icon(Icons.keyboard_arrow_left),
+                            color: Colors.black,
+                            onPressed: () {},
+                          ),
+                        ),
+                        SizedBox(
+                          width: width / 100,
+                          height: height / 20,
+                        ),
+                        DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(0x66, 0xFF, 0xFF, 0xFF),
+                            borderRadius: BorderRadius.all(Radius.circular(50)),
+                          ),
+                          child: IconButton(
+                            icon: Icon(Icons.keyboard_arrow_right),
+                            color: Colors.black,
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    )),
+              ],
+            )
+          ],
+        ),
       ),
       drawer: Theme(
           data: Theme.of(context).copyWith(
