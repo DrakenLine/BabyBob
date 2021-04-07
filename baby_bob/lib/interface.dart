@@ -1,7 +1,5 @@
-import 'package:control_pad/models/pad_button_item.dart';
 import 'package:flutter/material.dart';
-import 'package:control_pad/control_pad.dart';
-import 'package:control_pad/models/gestures.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class Interface extends StatefulWidget {
   @override
@@ -19,13 +17,25 @@ class _InterfaceState extends State<Interface> {
     _scaffoldKey.currentState.openDrawer();
   }
 
+  bool _isVisible = true;
+  
+  void showToast() {
+    setState(() {
+      _isVisible = !_isVisible;
+    });
+  }
+  
+  Color currentColor = Colors.grey.withOpacity(0.3);
+
+    void changeColor(Color color) {
+      print("color : $color");
+      setState(() => currentColor = color);
+      print("colorcur : $currentColor");
+    }
+
+    final List<Map> cases = List.generate(98, (index) => {'id': index, 'isSelected': false});
+
   bool isSwitched = false;
-
-  // JoystickDirectionCallback onDirectionChange(double degrees, double distance) {
-  //   print(
-  //       "Degrees: ${degrees.toStringAsFixed(2)}, distance: ${distance.toStringAsFixed(2)}");
-  // }
-
   @override
   Widget build(BuildContext context) {
     double sizeDrawer = MediaQuery.of(context).size.width / 1.75;
@@ -287,143 +297,300 @@ class _InterfaceState extends State<Interface> {
           child: Container(
             width: sizeDrawer,
             child: Drawer(
-                ////////////////////////////// SIDE MENU /////////////////////////////
-                child: Column(
-              children: [
-                Row(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(left: 10.0, top: 30.0),
-                      child: Ink(
-                          decoration: const ShapeDecoration(
-                            color: Colors.white70,
-                            shape: CircleBorder(),
-                          ),
-                          child: IconButton(
-                              padding: EdgeInsets.all(0.0),
-                              onPressed: _closeDrawer,
-                              icon: Icon(Icons.close,
-                                  color: Colors.black, size: 40.0))),
+              child: Column(
+                children: [
+                  Visibility(
+                  visible: _isVisible,
+                  child: drawer1(sizeDrawer, width, context)
+                  ),
+                  Visibility(
+                  visible: !_isVisible,
+                  child: drawer2(sizeDrawer, width, context)
+                  )
+                ],
+            )
+          )
+        ),
+      )
+    );
+  }
+
+  Column drawer1(double sizeDrawer, double width, BuildContext context) {
+    return Column(
+            children: [
+              Row(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(left: 10.0, top: 30.0),
+                    child: Ink(
+                        decoration: const ShapeDecoration(
+                          color: Colors.white70,
+                          shape: CircleBorder(),
+                        ),
+                        child: IconButton(
+                            padding: EdgeInsets.all(0.0),
+                            onPressed: _closeDrawer,
+                            icon: Icon(Icons.close,
+                                color: Colors.black, size: 40.0))),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10.0, top: 30.0),
+                    child: Text(
+                      'PARAMÈTRES',
+                      style:
+                          TextStyle(fontSize: 25.0, fontFamily: 'Conthrax'),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 10.0, top: 30.0),
-                      child: Text(
-                        'PARAMÈTRES',
-                        style:
-                            TextStyle(fontSize: 25.0, fontFamily: 'Conthrax'),
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(left: 30.0),
-                      child: Text(
-                        'LEDS :',
-                        style:
-                            TextStyle(fontSize: 20.0, fontFamily: 'Conthrax'),
-                      ),
+                  )
+                ],
+              ),
+              Row(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(left: 30.0),
+                    child: Text(
+                      'LEDS :',
+                      style:
+                          TextStyle(fontSize: 20.0, fontFamily: 'Conthrax'),
                     ),
-                    Container(
-                        margin: EdgeInsets.only(left: 180.0, top: 10.0),
-                        child: Transform.scale(
-                          scale: 1.5,
-                          child: Switch(
-                            value: isSwitched,
-                            onChanged: (value) {
-                              setState(() {
-                                isSwitched = value;
-                                print(isSwitched);
-                              });
-                            },
-                            activeTrackColor: Colors.green,
-                            inactiveTrackColor: Colors.grey,
-                            activeColor: Colors.white,
-                            inactiveThumbColor: Colors.white,
-                            //activeColor: Color(0xFFE5DCCA),
-                          ),
-                        ))
-                  ],
-                ),
-                Column(
-                  children: <Widget>[
-                    Row(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(left: 30.0),
-                          width: sizeDrawer / 1.25,
-                          child: Text(
-                            'ÉCRAN :',
-                            style: TextStyle(
-                                fontSize: 20.0, fontFamily: 'Conthrax'),
+                  ),
+                  Container(
+                      margin: EdgeInsets.only(left: 180.0, top: 10.0),
+                      child: Transform.scale(
+                        scale: 1.5,
+                        child: Switch(
+                          value: isSwitched,
+                          onChanged: (value) {
+                            setState(() {
+                              isSwitched = value;
+                              print(isSwitched);
+                            });
+                          },
+                          activeTrackColor: Colors.green,
+                          inactiveTrackColor: Colors.grey,
+                          activeColor: Colors.white,
+                          inactiveThumbColor: Colors.white,
+                          //activeColor: Color(0xFFE5DCCA),
+                        ),
+                      ))
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 30.0),
+                        width: sizeDrawer / 1.25,
+                        child: Text(
+                          'ÉCRAN :',
+                          style: TextStyle(
+                              fontSize: 20.0, fontFamily: 'Conthrax'),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      InkWell(
+                          onTap: () => {print("1")},
+                          child: ReusableContainer(
+                              width: sizeDrawer / 4,
+                              height: 50.0,
+                              text: "1")),
+                      InkWell(
+                          onTap: () => {print("2")},
+                          child: ReusableContainer(
+                              width: sizeDrawer / 4,
+                              height: 50.0,
+                              text: "2")),
+                      InkWell(
+                          onTap: () => {print("3")},
+                          child: ReusableContainer(
+                              width: sizeDrawer / 4,
+                              height: 50.0,
+                              text: "3")),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      InkWell(
+                          onTap: () => {print("4")},
+                          child: ReusableContainer(
+                              width: sizeDrawer / 4,
+                              height: 50.0,
+                              text: "4")),
+                      InkWell(
+                          onTap: () => {print("5")},
+                          child: ReusableContainer(
+                              width: sizeDrawer / 4,
+                              height: 50.0,
+                              text: "5")),
+                      InkWell(
+                          child: Container(
+                             margin: EdgeInsets.only(left: 25.0, top: 10.0),
+                            child: Ink(
+                              width: sizeDrawer / 4,
+                              height: 50.0,
+                              decoration:  BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: Colors.black, width : 2),
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                              child: IconButton(
+                                icon: Icon(Icons.create),
+                                color: Colors.black,
+                                onPressed: () => {
+                                  showToast()
+                                },
+                                iconSize: width/28
+                              ),
+                            ),
                           ),
                         ),
-                      ],
+                    ],
+                  )
+                ],
+              ),
+              Column(
+                children: [
+                  InkWell(
+                    onTap: () => {Navigator.pushNamed(context, '/')},
+                    child: Container(
+                      width: sizeDrawer / 2,
+                      height: 70.0,
+                      decoration: new BoxDecoration(
+                        color: Colors.white,
+                        border:
+                            new Border.all(color: Colors.black, width: 5.0),
+                        borderRadius: new BorderRadius.circular(20.0),
+                      ),
+                      margin: EdgeInsets.only(left: 25.0, top: 30.0),
+                      child: new Center(
+                        child: new Text(
+                          'QUITTER',
+                          style: new TextStyle(
+                              fontSize: 25.0,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
-                    Row(
-                      children: [
-                        InkWell(
-                            onTap: () => {print("1")},
-                            child: ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 50.0,
-                                text: "1")),
-                        InkWell(
-                            onTap: () => {print("2")},
-                            child: ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 50.0,
-                                text: "2")),
-                        InkWell(
-                            onTap: () => {print("3")},
-                            child: ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 50.0,
-                                text: "3")),
-                      ],
+                  )
+                ],
+              )
+            ],
+          );
+  }
+
+  Column drawer2(double sizeDrawer, double width, BuildContext context) {
+
+    return Column(
+            children: [
+              Row(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(left: 10.0, top: 30.0),
+                    child: Ink(
+                        decoration: const ShapeDecoration(
+                          color: Colors.white70,
+                          shape: CircleBorder(),
+                        ),
+                        child: IconButton(
+                            padding: EdgeInsets.all(0.0),
+                            onPressed: _closeDrawer,
+                            icon: Icon(Icons.close,
+                                color: Colors.black, size: 40.0)
+                              )
+                            ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 10.0, top: 30.0),
+                    child: Text(
+                      'DESSIN',
+                      style:
+                          TextStyle(fontSize: 25.0, fontFamily: 'Conthrax'),
                     ),
-                    Row(
-                      children: [
-                        InkWell(
-                            onTap: () => {print("4")},
-                            child: ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 50.0,
-                                text: "4")),
-                        InkWell(
-                            onTap: () => {print("5")},
-                            child: ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 50.0,
-                                text: "5")),
-                        InkWell(
-                            onTap: () => {print("6")},
-                            child: ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 50.0,
-                                text: "6")),
-                      ],
-                    )
-                  ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 25.0, left: 10.0),
+                    child: BlockPicker(
+                      pickerColor: currentColor,
+                      onColorChanged: changeColor,
+                      availableColors: [Colors.red, Colors.blue, Colors.green, Colors.yellow, Colors.purple, Colors.pinkAccent],
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                width: sizeDrawer/1.1,
+                height: sizeDrawer/2.2,
+                margin: EdgeInsets.only(top: 10),
+                child : 
+                 GridView.builder(
+                   physics: NeverScrollableScrollPhysics(),
+                    itemCount: cases.length,
+                    itemBuilder: (BuildContext context, int index) { 
+                      return RaisedButton(
+                        color: cases[index]['isSelected'] == true ? currentColor : Colors.grey.withOpacity(0.3),
+                        onPressed: () { 
+                          print('$index');
+                          setState(() {
+                            cases[index]['isSelected'] = !cases[index]['isSelected'];
+                          });
+                          print(cases[index]['isSelected']);
+                         },
+                        );
+                    }, gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 14,
+                      ),
+                  )    
                 ),
-                Column(
+              Container(
+                margin: EdgeInsets.only(top: 15, left: 20),
+                child: Row(
                   children: [
                     InkWell(
-                      onTap: () => {Navigator.pushNamed(context, '/')},
+                      onTap: () => {
+                        showToast()
+                      },
                       child: Container(
-                        width: sizeDrawer / 2,
-                        height: 70.0,
+                        width: sizeDrawer / 3,
+                        height: 50.0,
                         decoration: new BoxDecoration(
                           color: Colors.white,
                           border:
                               new Border.all(color: Colors.black, width: 5.0),
                           borderRadius: new BorderRadius.circular(20.0),
                         ),
-                        margin: EdgeInsets.only(left: 25.0, top: 30.0),
+                        margin: EdgeInsets.only(left: 25.0),
                         child: new Center(
                           child: new Text(
-                            'QUITTER',
+                            'RETOUR',
+                            style: new TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => {
+                        showToast()
+                      },
+                      child: Container(
+                        width: sizeDrawer / 2.5,
+                        height: 60.0,
+                        decoration: new BoxDecoration(
+                          color: Colors.white,
+                          border:
+                              new Border.all(color: Colors.black, width: 5.0),
+                          borderRadius: new BorderRadius.circular(20.0),
+                        ),
+                        margin: EdgeInsets.only(left: 25.0),
+                        child: new Center(
+                          child: new Text(
+                            'VALIDER',
                             style: new TextStyle(
                                 fontSize: 25.0,
                                 color: Colors.black,
@@ -433,62 +600,9 @@ class _InterfaceState extends State<Interface> {
                       ),
                     )
                   ],
-                )
-                /*Column(
-                      children: [
-                        Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(left: 30.0, top: 10.0),
-                              width: sizeDrawer / 1.25,
-                              child: Text('SON :', style: TextStyle(fontSize: 20.0, fontFamily: 'Conthrax'),),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 30.0,
-                                text: "1"
-                            ),
-                            ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 30.0,
-                                text: "2"
-                            ),
-                            ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 30.0,
-                                text: "3"
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 30.0,
-                                text: "4"
-                            ),
-                            ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 30.0,
-                                text: "5"
-                            ),
-                            ReusableContainer(
-                                width: sizeDrawer / 4,
-                                height: 30.0,
-                                text: "6"
-                            ),
-                          ],
-                        )
-                      ],
-                    )*/
-              ],
-            )),
-          )),
-    );
+                ),
+              )],
+          );
   }
 }
 
@@ -528,3 +642,4 @@ class ReusableContainer extends StatelessWidget {
     );
   }
 }
+
