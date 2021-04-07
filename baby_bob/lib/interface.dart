@@ -36,9 +36,6 @@ class _InterfaceState extends State<Interface> {
       backgroundColor: Colors.greenAccent,
       body: Container(
         width: width,
-        // decoration: BoxDecoration(
-        // image: DecorationImage(
-        // image: AssetImage("IMG_2240.jpeg"), fit: BoxFit.fill)),
         child: Column(
           children: <Widget>[
             Container(
@@ -146,10 +143,10 @@ class _InterfaceState extends State<Interface> {
                     margin:
                         EdgeInsets.only(top: height / 2.10, right: width / 20),
                     child: TextButton(
+                      onPressed: () => {},
                       style: TextButton.styleFrom(
                         shape: CircleBorder(),
-                        side: BorderSide(
-                            color: Colors.black, width: 3),
+                        side: BorderSide(color: Colors.black, width: 3),
                         primary: Colors.black,
                         backgroundColor: Colors.grey.withOpacity(0.2),
                         textStyle: TextStyle(
@@ -187,10 +184,10 @@ class _InterfaceState extends State<Interface> {
                     margin:
                         EdgeInsets.only(top: height / 2.10, left: width / 3.03),
                     child: TextButton(
+                      onPressed: () => {},
                       style: TextButton.styleFrom(
                         shape: CircleBorder(),
-                        side: BorderSide(
-                            color: Colors.black, width: 3),
+                        side: BorderSide(color: Colors.black, width: 3),
                         primary: Colors.black,
                         backgroundColor: Colors.grey.withOpacity(0.2),
                         textStyle: TextStyle(
