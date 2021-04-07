@@ -19,11 +19,21 @@ class _InterfaceState extends State<Interface> {
 
   bool _isVisible = true;
   
-    void showToast() {
-      setState(() {
-        _isVisible = !_isVisible;
-      });
+  void showToast() {
+    setState(() {
+      _isVisible = !_isVisible;
+    });
+  }
+  
+  Color currentColor = Colors.grey.withOpacity(0.3);
+
+    void changeColor(Color color) {
+      print("color : $color");
+      setState(() => currentColor = color);
+      print("colorcur : $currentColor");
     }
+
+    final List<Map> cases = List.generate(98, (index) => {'id': index, 'isSelected': false});
 
   bool isSwitched = false;
   @override
@@ -363,16 +373,6 @@ class _InterfaceState extends State<Interface> {
 
   Column drawer2(double sizeDrawer, double width, BuildContext context) {
 
-     Color currentColor = Colors.grey.withOpacity(0.3);
-
-      void changeColor(Color color) {
-        print("color : $color");
-        setState(() => currentColor = color);
-        print("colorcur : $currentColor");
-      }
-
-      final List<Map> cases = List.generate(98, (index) => {'id': index, 'isSelected': false});
-
     return Column(
             children: [
               Row(
@@ -388,7 +388,9 @@ class _InterfaceState extends State<Interface> {
                             padding: EdgeInsets.all(0.0),
                             onPressed: _closeDrawer,
                             icon: Icon(Icons.close,
-                                color: Colors.black, size: 40.0))),
+                                color: Colors.black, size: 40.0)
+                              )
+                            ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 10.0, top: 30.0),
